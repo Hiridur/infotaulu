@@ -3,24 +3,31 @@ import timeIcon from '../icons/time.png'
 import { observer } from 'mobx-react-lite'
 import { useContext } from 'react'
 import { MeetingContext } from '../App'
-//import { store } from '../App'
+import store from '../util/MobxStore';
 
 var classNames = require('classnames')
+const meetingStore = store;
 
-const ReservationTextBlock = observer((props) => {
+const ReservationTextBlock = observer((props, meetings) => {
+    console.log('meetings',meetingStore)
+    const {icon, text} = props;
+    console.log('store1',{store});
+    
     const contexti = useContext(MeetingContext)
     console.log('konteksti',contexti)
+    console.log('propcontext', meetings);
+    
     let blockClass = classNames({
         'icon': true,
-        'time-icon': props.icon == 'time',
-        'person-icon': props.icon == 'person',
-        'description-icon': props.icon == 'description'
+        'time-icon': icon == 'time',
+        'person-icon': icon == 'person',
+        'description-icon': icon == 'description'
     })
     //props.participants.map
     return (
         <div className='reservation-text-block'>
             <div className={blockClass}></div>
-            <div className='reservation-text'>{props.text + ' ' + useContext(MeetingContext)}</div>
+            <div className='reservation-text'>{text + ' ' + useContext(MeetingContext)}</div>
         </div>
     )
 })
@@ -43,6 +50,10 @@ const ReservationTextBlockB = (({store}) => {
     )
 })
 
+const Abc = observer(({meetings}) => {
+    console.log('store2',meetings);
+    return <div className='abc'/>
+})
 const Reservation = ((props) => (
     <div className='reservation'>
         <div className='reservation-text-block back-button'>
@@ -55,6 +66,7 @@ const Reservation = ((props) => (
             icon='time'
             //store={useContext(context)}
         />
+        <Abc/>
         <ReservationTextBlock
             text='tapaaminen'
             icon='time'

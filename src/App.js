@@ -7,27 +7,17 @@ import './styles/app.css';
 import { createContext, useEffect } from 'react';
 import { makeAutoObservable, observable } from 'mobx';
 import { observer } from 'mobx-react-lite';
+import store from './util/MobxStore';
 
 const SaveData = () => {
     var data = 0;
     axios.get('http://localhost:3001/meetings').then(response => {
         const meetings = response.data;
-        console.log('meetings',meetings)
+        console.log('fetched',meetings)
         //saveData(meetings)
         data = meetings
     })
     return makeAutoObservable({data})
-}
-//const daata = ['a'];
-function Fetch() {
-  var data;
-  useEffect(axios.get('http://localhost:3001/meetings').then(response => {
-      const meetings = response.data;
-      console.log('meetings fetched',meetings)
-      //saveData(meetings)
-      data = meetings
-  }),[])
-  return data
 }
 const daata = () => {
   var data;
@@ -54,10 +44,10 @@ export const MeetingContext = createContext(['a']);
 //   return values
 // }
 //export const context = MeetingContext;
-
+const meetingStore = store;
 function App(props) {
-    console.log('props',props)
-    //useEffect(SaveData)
+
+    store.setMeetingList(useEffect(SaveData));
     // //const data = Data.map(a => (a))
     // var data;
     // useEffect( () =>
@@ -71,10 +61,12 @@ function App(props) {
     // //SaveData()
 
     return (
+        <MeetingContext.Provider value={meetingStore}>
         <div className="main">
             <Left/>
             <Right/>
         </div>
+        </MeetingContext.Provider>
     );
 }
 
