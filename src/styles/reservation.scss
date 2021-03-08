@@ -1,0 +1,45 @@
+@import "common";
+
+.reservation {
+    .back-button {
+        background-color: $yellow;
+        cursor: pointer;
+    }
+    .reservation-text-block {
+        text-align: left;
+        height: 4rem;
+        .icon {
+            width: 2rem;
+            height: 2rem;
+            padding: 1rem;
+            background-size: 2rem;
+            background-repeat: no-repeat;
+            background-position: center;
+            float: left;
+        }
+        .time-icon {
+            background-image: url('../icons/time.png');
+        }
+        .person-icon {
+            background-image: url('../icons/person.png');
+        }
+        .description-icon {
+            background-image: url('../icons/description.png');
+        }
+        .back-icon {
+            background-image: url('../icons/chevron-left.svg');
+            font-size: 2rem;
+            color: #ffffff;
+            span {
+                
+                position: relative;
+                bottom: 1rem;
+            }
+        }
+        .reservation-text {
+            line-height: 2rem;
+            padding: 1rem;
+            float: left;
+        }
+    }
+}

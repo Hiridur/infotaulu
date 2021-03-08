@@ -1,0 +1,17 @@
+.upcoming-wrapper {
+    background-color: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-evenly;
+    .upcoming-item {
+        padding: 3rem;
+        display: inline-block;
+        &-time {
+            color: gray;
+        }
+        &-title {
+        }
+        &-author {
+            color: darkgray;
+        }
+    }
+}
