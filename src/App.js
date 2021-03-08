@@ -4,30 +4,22 @@ import Left from './components/Left';
 import Right from './components/Right';
 import Data from './data/meetings.json';
 import './styles/app.css';
-import { createContext, useEffect } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { makeAutoObservable, observable } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import store from './util/MobxStore';
 
 const SaveData = () => {
-    var data = 0;
-    axios.get('http://localhost:3001/meetings').then(response => {
+    const data = axios.get('http://localhost:3001/meetings').then(response => {
         const meetings = response.data;
         console.log('fetched',meetings)
         //saveData(meetings)
-        data = meetings
+        //data = meetings
+        return response.data;
     })
-    return makeAutoObservable({data})
-}
-const daata = () => {
-  var data;
-  axios.get('http://localhost:3001/meetings').then(response => {
-      const meetings = response.data;
-      console.log('meetings fetched',meetings)
-      //saveData(meetings)
-      data = meetings
-  })
-  return observable(data)
+    console.log('fetched2',data);
+    return data;
+    //return makeAutoObservable({data})
 }
 export const MeetingContext = createContext(['a']);
 // //function saveData(data) {
@@ -45,23 +37,24 @@ export const MeetingContext = createContext(['a']);
 // }
 //export const context = MeetingContext;
 const meetingStore = store;
-function App(props) {
+function App() {
 
-    store.setMeetingList(useEffect(SaveData));
-    // //const data = Data.map(a => (a))
-    // var data;
-    // useEffect( () =>
-    //     axios.get('http://localhost:3001/meetings').then(response => {
-    //         const meetings = response.data;
-    //         console.log('meetings',meetings)
-    //         //saveData(meetings)
-    //         data = meetings
-    //     })
-    //     )
-    // //SaveData()
+    const [meetings, setMeetings] = useState([])
+    useEffect(() => {
+        axios.get('http://localhost:3001/meetings').then(response => {
+            setMeetings(response.data)
+        })
+    }, [])
+    const response = SaveData()
+    console.log('response',response);
+    
+    store.setMeetingList(SaveData);
+    //store.setMeetingList(useEffect(SaveData));
+    console.log('saved',store);
+    
 
     return (
-        <MeetingContext.Provider value={meetingStore}>
+        <MeetingContext.Provider value={meetings}>
         <div className="main">
             <Left/>
             <Right/>

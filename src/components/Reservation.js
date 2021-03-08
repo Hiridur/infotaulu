@@ -11,7 +11,7 @@ const meetingStore = store;
 const ReservationTextBlock = observer((props, meetings) => {
     console.log('meetings',meetingStore)
     const {icon, text} = props;
-    console.log('store1',{store});
+    console.log('store1',store);
     
     const contexti = useContext(MeetingContext)
     console.log('konteksti',contexti)
@@ -27,7 +27,7 @@ const ReservationTextBlock = observer((props, meetings) => {
     return (
         <div className='reservation-text-block'>
             <div className={blockClass}></div>
-            <div className='reservation-text'>{text + ' ' + useContext(MeetingContext)}</div>
+            <div className='reservation-text'>{text}</div>
         </div>
     )
 })
@@ -50,13 +50,9 @@ const ReservationTextBlockB = (({store}) => {
     )
 })
 
-const Abc = observer(({meetings}) => {
-    console.log('store2',meetings);
-    return <div className='abc'/>
-})
 const Reservation = ((props) => (
     <div className='reservation'>
-        <div className='reservation-text-block back-button'>
+        <div className='reservation-text-block back-button' onClick={props.goBack}>
             <div className='icon back-icon'>{//<div>{'<'}</div>
             }</div>
             <div className='reservation-text'>{props.title||'abc work'}</div>
@@ -66,7 +62,6 @@ const Reservation = ((props) => (
             icon='time'
             //store={useContext(context)}
         />
-        <Abc/>
         <ReservationTextBlock
             text='tapaaminen'
             icon='time'
