@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useContext } from 'react'
+import { useState, useContext } from 'react';
 import { MeetingContext } from '../App'
 import '../styles/right.scss';
 import Reservation from './Reservation';

@@ -12,30 +12,11 @@ import store from './util/MobxStore';
 const SaveData = () => {
     const data = axios.get('http://localhost:3001/meetings').then(response => {
         const meetings = response.data;
-        console.log('fetched',meetings)
-        //saveData(meetings)
-        //data = meetings
         return response.data;
     })
-    console.log('fetched2',data);
     return data;
-    //return makeAutoObservable({data})
 }
-export const MeetingContext = createContext(['a']);
-// //function saveData(data) {
-//   //return makeAutoObservable({data})
-// function saveData() {
-
-//   const values = useEffect(() => {
-//     axios.get('http://localhost:3001/meetings').then(response => {
-//         const meetings = response.data;
-//         console.log('meetings',meetings)
-//         //saveData(meetings)
-//     })
-//   }, [])
-//   return values
-// }
-//export const context = MeetingContext;
+export const MeetingContext = createContext([]);
 const meetingStore = store;
 function App() {
 
@@ -49,7 +30,6 @@ function App() {
     console.log('response',response);
     
     store.setMeetingList(SaveData);
-    //store.setMeetingList(useEffect(SaveData));
     console.log('saved',store);
     
 

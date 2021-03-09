@@ -1,19 +1,6 @@
-import Image from '../img/bg-image.jpg'
-import '../styles/left.scss';
+import TitleWrapper from './TitleWrapper';
 import Upcoming from './Upcoming';
-import { render } from 'react-dom';
-
-const TitleWrapper = (props) => (
-    <div className='title-wrapper'>
-        <div className='ongoing-text'>Current meeting</div>
-        <div className='ongoing-title'>{props.title}</div>
-        <div className='ongoing-time'>{props.time}</div>
-        <div className='ongoing-author'>{props.author}</div>
-        <div className='current-text'>
-            Text
-        </div>
-    </div>
-)
+import '../styles/left.scss';
 
 const Left = () => (
     <div className='current-next-wrapper'>
@@ -23,5 +10,4 @@ const Left = () => (
     </div>
 )
 
-//render(<)
 export default Left;

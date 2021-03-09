@@ -3,15 +3,20 @@
     display: flex;
     justify-content: space-evenly;
     .upcoming-item {
-        padding: 3rem;
+        padding: 6vh;
         display: inline-block;
         &-time {
-            color: gray;
+            color: lightgray;
         }
         &-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            padding:0.5rem;
         }
         &-author {
             color: darkgray;
+            text-transform: uppercase;
+            font-weight: 700;
         }
     }
 }
