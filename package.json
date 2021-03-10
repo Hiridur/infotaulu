@@ -9,7 +9,6 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "json-server": "^0.16.3",
-    "mobx": "^6.1.8",
     "mobx-react-lite": "^3.2.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",

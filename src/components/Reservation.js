@@ -1,16 +1,12 @@
-import '../styles/reservation.scss'
-import timeIcon from '../icons/time.png'
-import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
-import { MeetingContext } from '../App'
-import store from '../util/MobxStore';
+import { toLongDateString, toTimeString } from '../util/DateUtil'
+import '../styles/reservation.scss'
 
 var classNames = require('classnames')
-const meetingStore = store;
 
-const ReservationTextBlock = observer((props) => {
+const ReservationTextBlock = (props) => {
     const {icon, text} = props;
-    
+
     let iconClass = classNames({
         'icon': true,
         'time-icon': icon == 'time',
@@ -34,38 +30,47 @@ const ReservationTextBlock = observer((props) => {
             }
         </div>
     )
-})
+}
 
 const Reservation = ((props) => {
+    const { subject, organizer, startTime, endTime, participants } = props.meeting;
 
     const [participantsOpen, toggleParticipants] = useState(false)
-    const {Subject, Organizer, StartTime, EndTime, Participants } = props;
-    var date = Date(StartTime);
-    console.log('date', date);
-    
+    const date = [
+        toTimeString(startTime),
+        toTimeString(endTime)
+    ].join(' TO ')
+
 
     return <div className='reservation'>
         <div className='reservation-text-block reserve-back-button' onClick={props.goBack}>
             <div className='icon back-icon'>
             </div>
-            <div className='reservation-text reservation-title'>{props.title||'abc work'}</div>
+            <div className='reservation-text reservation-title'>{
+                props.title||'abc work'
+            }</div>
         </div>
+        <ReservationTextBlock
+            text={toLongDateString(startTime)}
+            icon='time'
+        />
         <ReservationTextBlock
             text={date}
             icon='time'
-            //store={useContext(context)}
         />
         <ReservationTextBlock
-            text='tapaaminen'
-            icon='time'
-        />
-        <ReservationTextBlock
-            text='tapaaminen'
+            text='PARTICIPANTS'
             icon='person'
-            participants={{a:'a'}}
+            participants={participants}
             participantsOpen={participantsOpen}
             toggleParticipants={toggleParticipants}
         />
+        {participants?.map(participant =>
+            <ReservationTextBlock
+                text={participant.name}
+                title={participant.title}
+            />
+        )}
         <ReservationTextBlock
             text='tapaaminen'
             icon='description'
