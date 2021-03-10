@@ -12,10 +12,7 @@ const Left = (props) => {
         <div className='current-next-wrapper'>
             <div/>
             <TitleWrapper
-                title={current.subject}
-                startTime={current.startTime}
-                endTime={current.endTime}
-                organizer={current.organizer}
+                meeting={current}
             />
             <Upcoming
                 meetings={upcoming}
