@@ -5,7 +5,7 @@ import '../styles/reservation.scss'
 var classNames = require('classnames')
 
 const ReservationTextBlock = (props) => {
-    const {icon, text} = props;
+    const {icon, text, onClick, description, showParticipants} = props;
 
     let iconClass = classNames({
         'icon': true,
@@ -13,45 +13,56 @@ const ReservationTextBlock = (props) => {
         'person-icon': icon == 'person',
         'description-icon': icon == 'description'
     })
-    //props.participants.map
     return (
-        <div className='reservation-text-block'>
+        <div className='reservation-text-block' onClick={onClick}>
             <div className={iconClass}/>
-            <div className='reservation-text'>{text}</div>
-            {props.participants
-                ? <div
-                    onClick={props.toggleParticipants}
-                    className={classNames({
-                        'participants-icon': true,
-                        'participants-open':props.participantsOpen
-                    })}
-                />
-                : <></>
-            }
+            {text&&<div className='reservation-text'>{text}</div>}
+            {description&&<div className='reservation-description'>{description}</div>}
+            {showParticipants&&<div className='reservation-participants-shevron'/>}
         </div>
     )
 }
 
-const Reservation = ((props) => {
-    const { subject, organizer, startTime, endTime, participants } = props.meeting;
+const ParticipantsBlock = (props) => {
+    const { participants, showParticipants } = props;
 
-    const [participantsOpen, toggleParticipants] = useState(false)
+    return showParticipants
+        && participants
+        && participants.map(participant =>
+            <ReservationTextBlock
+                text={participant.name}
+                title={participant.title}
+            />
+        )
+
+}
+
+const Reservation = ((props) => {
+    const {
+        subject,
+        startTime, endTime,
+        description,
+        participants
+    } = props.meeting;
+
+    const [showParticipants, setShowParticipants] = useState(false)
+    const toggleParticipants = () => (
+        setShowParticipants(!showParticipants))
+        //console.log('set partics',showParticipants));
+
     const date = [
         toTimeString(startTime),
         toTimeString(endTime)
     ].join(' TO ')
 
-
     return <div className='reservation'>
         <div className='reservation-text-block reserve-back-button' onClick={props.goBack}>
             <div className='icon back-icon'>
             </div>
-            <div className='reservation-text reservation-title'>{
-                props.title||'abc work'
-            }</div>
+            <div className='reservation-title'>{subject}</div>
         </div>
         <ReservationTextBlock
-            text={toLongDateString(startTime)}
+            text={toLongDateString(startTime).toUpperCase()}
             icon='time'
         />
         <ReservationTextBlock
@@ -61,19 +72,20 @@ const Reservation = ((props) => {
         <ReservationTextBlock
             text='PARTICIPANTS'
             icon='person'
-            participants={participants}
-            participantsOpen={participantsOpen}
-            toggleParticipants={toggleParticipants}
+            onClick={toggleParticipants}
+            showParticipants={showParticipants}
         />
-        {participants?.map(participant =>
-            <ReservationTextBlock
-                text={participant.name}
-                title={participant.title}
-            />
-        )}
+        <ParticipantsBlock
+            participants={participants}
+            showParticipants={showParticipants}
+        />
         <ReservationTextBlock
-            text='tapaaminen'
+            text='DESCRIPTION'
             icon='description'
+        />
+        <ReservationTextBlock
+            description={description}
+            small
         />
     </div>
 })

@@ -5,6 +5,8 @@ import '../styles/left.scss';
 const Left = (props) => {
     const {meetings} = props;
     const current = meetings[0]||{};
+    console.log('current', current);
+
 
     const upcoming = meetings.slice(1,4);
 

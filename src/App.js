@@ -24,6 +24,7 @@ function App() {
                     organizer: meeting['Organizer'],
                     startTime: meeting['StartTime'],
                     endTime: meeting['EndTime'],
+                    description: meeting['Description'],
                     participants: meeting['Participants']?.map(
                         participant => ({
                             name: participant['Name'],

@@ -4,8 +4,9 @@ import { toTimeString } from '../util/DateUtil';
 const TitleWrapper = (props) => (
     <div className='title-wrapper'>
         <div className='ongoing-text'>Current meeting</div>
-        <div className='ongoing-title'>{props.meeting.title}</div>
-        {props.meeting.startTime?(
+        <div className='ongoing-title'>{props.meeting.subject}</div>
+        {console.log('current',props)}{
+         props.meeting.startTime?(
             <div className='ongoing-time'>
                 <span>{toTimeString(props.meeting.startTime)}</span>
                 <span>--</span>
