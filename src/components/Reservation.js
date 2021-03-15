@@ -9,10 +9,12 @@ const ReservationTextBlock = (props) => {
 
     let iconClass = classNames(
         'icon',
-        {'time-icon': icon === 'time',
-        'person-icon': icon === 'person',
-        'description-icon': icon === 'description'
-    })
+        {
+            'time-icon': icon === 'time',
+            'person-icon': icon === 'person',
+            'description-icon': icon === 'description'
+        }
+    )
     return (
         <div className='reservation-text-block' onClick={onClick}>
             <div className={iconClass}/>
@@ -25,14 +27,14 @@ const ReservationTextBlock = (props) => {
 const ParticipantsBlock = (props) => {
     const { participants, showParticipants } = props;
 
-    return showParticipants
-        && participants
-        && participants.map(participant =>
+    if (showParticipants && participants)
+        return participants.map(participant =>
             <ReservationTextBlock
                 text={participant.name}
                 title={participant.title}
             />
         )
+    return <></>
 
 }
 

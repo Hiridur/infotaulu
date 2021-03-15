@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import Left from './components/Left';
-import Right from './components/Right';
+import CalendarContainer from './components/CalendarContainer';
 import './styles/app.css';
 
 /* const SaveData = () => {
@@ -51,7 +51,7 @@ function App() {
         //<MeetingContext.Provider value={meetings}>
         <div className="main">
             <Left meetings={meetings}/>
-            <Right meetings={meetings}/>
+            <CalendarContainer meetings={meetings}/>
         </div>
         //</MeetingContext.Provider>
     );

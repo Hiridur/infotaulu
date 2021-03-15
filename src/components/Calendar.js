@@ -3,7 +3,11 @@ import Reservation from './Reservation';
 import '../styles/calendar.scss';
 
 const CalendarItem = (props) => (
-    <div className='calendar-item' onClick={() => props.setSelected(props.meeting)}>
+    <div
+        className='calendar-item'
+        onClick={() => props.setSelected(props.meeting)}
+        style={{height: (props.duration-1)*6+2+'vh'}}
+    >
         <div className='calendar-item-title'>{props.meeting?.subject}</div>
         <div className='calendar-item-organizer'>{props.meeting?.organizer}</div>
     </div>
@@ -18,72 +22,62 @@ const isCurrentDay = (meeting) => {
         date.getMonth() === currentDay.getMonth() &&
         date.getDate() === currentDay.getDate()
 }
+const meetingDuration = (meeting) => {
+    if (!meeting) return 1
+    const startTime = new Date(meeting.startTime);
+    const endTime = new Date(meeting.endTime);
+    return (endTime-startTime)/(1000*60*30); // meeting duration in half hours
+}
 
 const Calendar = (props) => {
-    //const [selected, setSelected] = useState();
     const {meetings, setSelected} = props;
 
-    /*if (selected) return (
-        <div className='right'>
-            <Reservation meeting={selected} goBack={() => setSelected()}/>
-        </div>
-    )*/
     const todaysMeetings = meetings?.filter((meeting) => (isCurrentDay(meeting)))
     console.log('isCurrentDay list',todaysMeetings);
     let cur = false;
 
     return <table className='reservation-calendar'>
-        <tbody>
-            {
-                Array.apply(null, {length: 20}).map((_, i)=>{
-                    const hours = Math.floor(i/2+7);
-                    const minutes = (i%2?'30':'00');
-                    const currentMeeting = todaysMeetings?.find(
-                        (meeting) => {
-                            const date = new Date(meeting.startTime);
-                            console.log('klo event',date.getHours(),hours, date.getMinutes(), minutes, minutes -(-30), date);
+        <tbody> {
+            Array.apply(null, {length: 23}).map((_, i)=>{
+                const hours = Math.floor(i/2+7);
+                const minutes = (i%2?'30':'00');
+                const currentMeeting = todaysMeetings?.find(
+                    (meeting) => {
+                        const startTime = new Date(meeting.startTime);
+                        const endTime = new Date(meeting.endTime);
+                        console.log('klo event',startTime.getHours(),
+                            hours, startTime.getMinutes(), minutes, minutes -(-30),
+                            startTime, endTime, (endTime-startTime)/(1000*60*30));
 
-                            return (
-                                date.getHours() === hours &&
-                                date.getMinutes() >= minutes &&
-                                date.getMinutes() < minutes-(-30)
-                            )
-                        }
-                    )
-                    console.log('found',currentMeeting);
-                    cur = !!currentMeeting;
+                        return (
+                            startTime.getHours() === hours &&
+                            startTime.getMinutes() >= minutes &&
+                            startTime.getMinutes() < minutes-(-30)
+                        )
+                    }
+                )
+                console.log('found',currentMeeting);
+                cur = !!currentMeeting;
 
-                    return <tr>
-                        <td className='time-column'>{hours + ':' + minutes}</td>
-                        <td className='event-column'>
-                            {currentMeeting &&
+                const duration = meetingDuration(currentMeeting);
+
+                return <tr className='calendar-row'>
+                    <td className='time-column'>{hours + ':' + minutes}</td>
+                    {currentMeeting
+                        ? <td className='event-column' rowSpan={duration}>
                             <CalendarItem
                                 setSelected={
                                     (meeting) => setSelected(meeting)
                                 }
                                 meeting={currentMeeting}
-                            />}
+                                duration={duration}
+                            />
                         </td>
-                    </tr>
-                })
-            }
-        <tr>
-            <td>a</td>
-            <td rowspan='2' colspan='2'>a</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-        </tr>
-        <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-        </tr></tbody>
+                        : <td className='event-column empty'></td>
+                    }
+                </tr>
+            })
+        }</tbody>
     </table>
 }
 

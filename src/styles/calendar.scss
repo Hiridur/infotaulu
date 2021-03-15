@@ -1,19 +1,38 @@
 @import "common";
 
 .reservation-calendar {
-    .calendar-item {
-        box-shadow: 0px 0px 3px lightgrey;
-        padding: 2vh 2vw;
-        margin-left: 20%;
-        border-left: $yellow 0.75vw solid;
+    padding-right: 5%;
+    .calendar-row {
     }
-    width: 100%;
     .time-column {
-        width: 6vw;
+        width: 5vw;
         height: 6vh;
         vertical-align: text-top;
+        text-align: center;
+        font-size: 1.25vh;
+        font-weight: 900;
     }
     .event-column {
-        width: initial;
+        vertical-align: top;
+        //border-bottom: 1px gray solid;
+        //box-shadow: 0px 0px 3px lightgrey;
+        &.empty {
+            box-shadow: 0 -3px 2px -2px lightgray;
+        }
+        .calendar-item {
+            box-shadow: 0 0 3px lightgrey;
+            padding: 2vh 2vw;
+            border-left: $yellow 0.75vw solid;
+            &-title {
+                font-size: 2vh;
+                font-weight: 700;
+            }
+            &-organizer {
+                font-size: 1.5vh;
+                line-height: 2vh;
+                color: gray;
+                text-transform: uppercase;
+            }
+        }
     }
 }

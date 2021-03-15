@@ -3,20 +3,22 @@
     display: flex;
     justify-content: space-evenly;
     .upcoming-item {
-        padding: 6vh;
+        padding: 6vh 1vw;
         display: inline-block;
         &-time {
             color: lightgray;
+            font-size: 1vw;
         }
         &-title {
             font-weight: 700;
-            font-size: 1.3rem;
-            padding:0.5rem;
+            font-size: 1.5vw;
+            padding: 0.5vh 0;
         }
         &-organizer {
             color: darkgray;
             text-transform: uppercase;
             font-weight: 700;
+            font-size: 1vw;
         }
     }
 }

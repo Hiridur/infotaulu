@@ -1,17 +1,21 @@
 .title-wrapper {
     text-transform: uppercase;
-    .ongoing-text {
-        font-size: 1.5vw;
-        font-weight: 300;
-        color:lightgray;
-    }
+    text-align: center;
     .ongoing-title {
         font-size: 4.5vw;
         font-weight: 900;
     }
-    .ongoing-organizer, .ongoing-time {
-        font-size: 1vw;
+    .ongoing-text, .ongoing-time, .ongoing-organizer {
         font-weight: 300;
         color:lightgray;
+    }
+    .ongoing-text {
+        font-size: 1.5vw;
+    }
+    .ongoing-organizer {
+        font-size: 1vw;
+    }
+    .ongoing-time {
+        font-size: 1.5vw;
     }
 }
