@@ -1,9 +1,9 @@
 .main {
   text-align: center;
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
 }
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -38,3 +38,4 @@
     transform: rotate(360deg);
   }
 }
+*/

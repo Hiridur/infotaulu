@@ -1,5 +1,6 @@
 import '../styles/titleWrapper.scss';
 import { toTimeString } from '../util/DateUtil';
+//import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const TitleWrapper = (props) => (
     <div className='title-wrapper'>

@@ -70,5 +70,11 @@
                 }
             }
         }
+        .participation {
+            background-image: url('../icons/chevron-left.png');
+            &.open {
+                transform: rotate(180deg);
+            }
+        }
     }
 }

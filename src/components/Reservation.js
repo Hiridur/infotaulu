@@ -5,20 +5,19 @@ import '../styles/reservation.scss'
 var classNames = require('classnames')
 
 const ReservationTextBlock = (props) => {
-    const {icon, text, onClick, description, showParticipants} = props;
+    const {icon, text, onClick} = props;
 
-    let iconClass = classNames({
-        'icon': true,
-        'time-icon': icon == 'time',
-        'person-icon': icon == 'person',
-        'description-icon': icon == 'description'
+    let iconClass = classNames(
+        'icon',
+        {'time-icon': icon === 'time',
+        'person-icon': icon === 'person',
+        'description-icon': icon === 'description'
     })
     return (
         <div className='reservation-text-block' onClick={onClick}>
             <div className={iconClass}/>
             {text&&<div className='reservation-text'>{text}</div>}
-            {description&&<div className='reservation-description'>{description}</div>}
-            {showParticipants&&<div className='reservation-participants-shevron'/>}
+            {props.children}
         </div>
     )
 }
@@ -74,7 +73,16 @@ const Reservation = ((props) => {
             icon='person'
             onClick={toggleParticipants}
             showParticipants={showParticipants}
-        />
+        >
+            <div className={
+                'reservation-participants-shevron-'
+                +(showParticipants?'open':'close')
+            }/>
+            <div className={classNames(
+                'reservation-participants-shevron',
+                {'reservation-participants-open': showParticipants
+            })}/>
+        </ReservationTextBlock>
         <ParticipantsBlock
             participants={participants}
             showParticipants={showParticipants}
@@ -83,10 +91,9 @@ const Reservation = ((props) => {
             text='DESCRIPTION'
             icon='description'
         />
-        <ReservationTextBlock
-            description={description}
-            small
-        />
+        <ReservationTextBlock small >
+            <div className='reservation-description'>{description}</div>
+        </ReservationTextBlock>
     </div>
 })
 
