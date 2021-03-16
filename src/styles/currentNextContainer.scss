@@ -4,6 +4,6 @@
     flex-direction: column;
     justify-content: space-between;
     background: #000000 url('../img/bg-image.jpg') no-repeat center center fixed;
-    background-size: 100%;
+    background-size: max(100%, 133vh);
     color: white;
 }

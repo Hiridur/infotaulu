@@ -2,7 +2,23 @@
 
 .reservation-calendar {
     padding-right: 5%;
-    .calendar-row {
+    position: relative;
+    .calendar-tracker {
+        border-top: 3px solid $yellow;
+        position: absolute;
+        top: 0vh;
+        left: 5vw;
+        width: 26vw;
+        z-index: -1;
+        .calendar-tracker-ball {
+            width: min(1vh, 1vw);
+            height: min(1vh, 1vw);
+            top: calc(-1px - min(0.5vh, 0.5vw));
+            left: calc(0px - min(0.5vh, 0.5vw));
+            position: relative;
+            background-color: $yellow;
+            border-radius: 10vw;
+        }
     }
     .time-column {
         width: 5vw;
@@ -21,14 +37,16 @@
         }
         .calendar-item {
             box-shadow: 0 0 3px lightgrey;
-            padding: 2vh 2vw;
+            padding: 1.5vh 2vw;
             border-left: $yellow 0.75vw solid;
+            background-color: white;
+            cursor: pointer;
             &-title {
                 font-size: 2vh;
                 font-weight: 700;
             }
             &-organizer {
-                font-size: 1.5vh;
+                font-size: 1.2vh;
                 line-height: 2vh;
                 color: gray;
                 text-transform: uppercase;

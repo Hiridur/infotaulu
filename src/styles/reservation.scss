@@ -2,7 +2,7 @@
 
 .reservation {
     .reservation-text-block {
-        padding: 1.5vh 1.5vw;
+        padding: 2vh 1.5vw;
         /* display: flex; */
         /* overflow: hidden; */
         &:nth-child(2) {
@@ -16,21 +16,20 @@
             cursor: pointer;
             padding-top: 2.5vh;
             padding-bottom: 2.5vh;
+            border: none;
         }
         .reservation-title,
         .reservation-text,
         .reservation-description {
-            line-height: 2.25vh;
-            padding-left: 4vw;
+            line-height: 3vh;
             font-weight: 700;
             color: #3d3d3d;
-            /* display: inline-block; */
+            display: inline-block;
             &.reservation-title {
                 font-size: 1.75vh;
             }
         }
         .reservation-text {
-
             font-size: 1.5vh;
             font-weight: 700;
         }
@@ -40,17 +39,19 @@
         }
         .reservation-description {
             line-height: 1.25vh;
-            font-size: 1vh;
+            font-size: 1.25vh;
+            color: black;
             font-weight: 400;
+            padding-left: 4vw;
+            display: block;
         }
         .icon {
             width: 3vw;
-            height: 2.5vh;
+            height: 3vh;
             margin-right: 1vw;
-            background-size: 2.5vh;
+            background-size: min(3vh, 3vw);
             background-repeat: no-repeat;
             background-position: center;
-            /* display: inline-block; */
             float: left;
             &.time-icon {
                 background-image: url('../icons/time.png');
@@ -63,17 +64,53 @@
             }
             &.back-icon {
                 background-image: url('../icons/chevron-left.svg');
-                span {
-                    position: relative;
-                    bottom: 1vh;
-                }
             }
         }
-        .participation {
-            background-image: url('../icons/chevron-left.png');
-            &.open {
+        &.reservation-participants {
+            cursor: pointer;
+            .reservation-text {
+                width: calc(80% - 4vw);
+            }
+            .reservation-participants-icon {
+                float: right;
+                margin-right: 0;
+                background-image: url('../icons/chevron-down.svg');
+            }
+            .reservation-participants-open {
                 transform: rotate(180deg);
             }
         }
+    }
+    .participants-container {
+        padding-left: 4vw;
+        border-top: #f3f3f3 1px solid;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        .participant-row {
+            text-transform: uppercase;
+            overflow: hidden;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+            .icon {
+                border-radius: 50px;
+                background-color: #eeeeee;
+                height: min(4vh, 3.5vw);
+                width: min(4vh, 3.5vw);
+                margin-right: 1vw;
+                float: left;
+                top: -0.5vh;
+                position: relative;
+            }
+            .participant-name {
+                font-size: 1.25vh;
+                font-weight: 700;
+            }
+            .participant-title {
+                font-size: 1vh;
+                color: gray;
+                font-weight: 700;
+            }
+        }
+
     }
 }

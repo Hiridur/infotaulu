@@ -5,7 +5,7 @@ import '../styles/reservation.scss'
 var classNames = require('classnames')
 
 const ReservationTextBlock = (props) => {
-    const {icon, text, onClick} = props;
+    const {icon, text, onClick, customClass} = props;
 
     let iconClass = classNames(
         'icon',
@@ -15,8 +15,9 @@ const ReservationTextBlock = (props) => {
             'description-icon': icon === 'description'
         }
     )
+    const blockClass = ['reservation-text-block', customClass].join(' ');
     return (
-        <div className='reservation-text-block' onClick={onClick}>
+        <div className={blockClass} onClick={onClick}>
             <div className={iconClass}/>
             {text&&<div className='reservation-text'>{text}</div>}
             {props.children}
@@ -28,12 +29,15 @@ const ParticipantsBlock = (props) => {
     const { participants, showParticipants } = props;
 
     if (showParticipants && participants)
-        return participants.map(participant =>
-            <ReservationTextBlock
-                text={participant.name}
-                title={participant.title}
-            />
-        )
+        return <div className='participants-container'>
+            {participants.map(participant =>
+                <div className='participant-row'>
+                    <div className='icon participant-icon'></div>
+                    <div className='participant-name'>{participant.name}</div>
+                    <div className='participant-title'>{participant.title}</div>
+                </div>
+            )}
+        </div>
     return <></>
 
 }
@@ -75,15 +79,15 @@ const Reservation = ((props) => {
             icon='person'
             onClick={toggleParticipants}
             showParticipants={showParticipants}
+            customClass='reservation-participants'
         >
-            <div className={
-                'reservation-participants-shevron-'
-                +(showParticipants?'open':'close')
-            }/>
-            <div className={classNames(
-                'reservation-participants-shevron',
-                {'reservation-participants-open': showParticipants
-            })}/>
+            {participants && <div className={classNames(
+                'icon reservation-participants-icon',
+                {
+                    'reservation-participants-open': showParticipants,
+                    'reservation-participants-close': !showParticipants
+                }
+            )}/>}
         </ReservationTextBlock>
         <ParticipantsBlock
             participants={participants}
@@ -93,7 +97,7 @@ const Reservation = ((props) => {
             text='DESCRIPTION'
             icon='description'
         />
-        <ReservationTextBlock small >
+        <ReservationTextBlock>
             <div className='reservation-description'>{description}</div>
         </ReservationTextBlock>
     </div>

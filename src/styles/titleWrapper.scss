@@ -1,3 +1,5 @@
+@import "common";
+
 .title-wrapper {
     text-transform: uppercase;
     text-align: center;
@@ -5,7 +7,9 @@
         font-size: 4.5vw;
         font-weight: 900;
     }
-    .ongoing-text, .ongoing-time, .ongoing-organizer {
+    .ongoing-text,
+    .ongoing-time,
+    .ongoing-organizer {
         font-weight: 300;
         color:lightgray;
     }
@@ -15,7 +19,28 @@
     .ongoing-organizer {
         font-size: 1vw;
     }
+    .ongoing-separator {
+        height: 1px;
+        width: 2vw;
+        margin: 2vh auto;
+        background-color: white;
+    }
     .ongoing-time {
         font-size: 1.5vw;
+        margin: 2vh 0 1vh;
+        .ongoing-progress {
+            display: inline-block;
+            width: 25vw;
+            border-radius: 5vw;
+            background-color: #505050;
+            height: 0.6vh;
+            margin: 0.4vh 2vh;
+            .ongoing-progress-percentile {
+                width: 0px;
+                background-color: $yellow;
+                height: inherit;
+                border-radius: inherit;
+            }
+        }
     }
 }

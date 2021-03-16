@@ -16,7 +16,6 @@ const NextItem = (props) => (
 const Upcoming = (props) => (
     <div className='upcoming-wrapper'>
         {props.meetings?.map(meeting => {
-            console.log('upcoming', meeting)
             return <NextItem
                 startTime = {meeting.startTime}
                 endTime = {meeting.endTime}

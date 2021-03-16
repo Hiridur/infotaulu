@@ -1,22 +1,10 @@
 import { useState } from 'react';
 import Reservation from './Reservation';
-import '../styles/calendarContainer.scss';
 import Calendar from './Calendar';
-
-const isCurrentDay = (meeting) => {
-    const date = new Date(meeting?.startTime);
-    const currentDay = new Date('2018-03-03T10:30:00');
-    console.log('dates',date,currentDay);
-
-
-    return date.getFullYear() === currentDay.getFullYear() &&
-        date.getMonth() === currentDay.getMonth() &&
-        date.getDate() === currentDay.getDate()
-}
+import '../styles/calendarContainer.scss';
 
 const CalendarContainer = ({...rest}) => {
     const [selected, setSelected] = useState();
-
     if (selected) return (
         <div className='calendar-container'>
             <Reservation meeting={selected} goBack={() => setSelected()}/>
