@@ -1,7 +1,7 @@
 import TitleWrapper from './TitleWrapper';
 import Upcoming from './Upcoming';
-import '../styles/currentNextContainer.scss';
 import { currentTime, progress } from '../util/DateUtil';
+import '../styles/currentNextContainer.scss';
 
 const CurrentNextContainer = (props) => {
     const {meetings} = props;

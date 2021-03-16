@@ -11,6 +11,7 @@ function App() {
         axios.get('http://localhost:3001/meetings').then(response => {
             const fetchedMeetings = response.data.map(meeting =>
                 ({
+                    id: Math.random(),
                     subject: meeting['Subject'],
                     organizer: meeting['Organizer'],
                     startTime: meeting['StartTime'],
@@ -18,6 +19,7 @@ function App() {
                     description: meeting['Description'],
                     participants: meeting['Participants']?.map(
                         participant => ({
+                            id: Math.random(),
                             name: participant['Name'],
                             title: participant['Title']
                         })
@@ -28,7 +30,7 @@ function App() {
         })
     }, [])
 
-    // Assuming the meetings in ascending order by starting time
+    // Assuming the meetings are in ascending order by starting time
 
     return (
         <div className="main">

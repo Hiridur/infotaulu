@@ -30,8 +30,6 @@
     }
     .event-column {
         vertical-align: top;
-        //border-bottom: 1px gray solid;
-        //box-shadow: 0px 0px 3px lightgrey;
         &.empty {
             box-shadow: 0 -3px 2px -2px lightgray;
         }
@@ -39,7 +37,6 @@
             box-shadow: 0 0 3px lightgrey;
             padding: 1.5vh 2vw;
             border-left: $yellow 0.75vw solid;
-            background-color: white;
             cursor: pointer;
             &-title {
                 font-size: 2vh;

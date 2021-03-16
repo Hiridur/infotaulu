@@ -21,6 +21,7 @@ const Upcoming = (props) => (
                 endTime = {meeting.endTime}
                 subject = {meeting.subject}
                 organizer = {meeting.organizer}
+                key = {meeting.id}
             />
         })}
     </div>

@@ -31,7 +31,7 @@ const ParticipantsBlock = (props) => {
     if (showParticipants && participants)
         return <div className='participants-container'>
             {participants.map(participant =>
-                <div className='participant-row'>
+                <div className='participant-row' key={participant.id}>
                     <div className='icon participant-icon'></div>
                     <div className='participant-name'>{participant.name}</div>
                     <div className='participant-title'>{participant.title}</div>
@@ -53,7 +53,6 @@ const Reservation = ((props) => {
     const [showParticipants, setShowParticipants] = useState(false)
     const toggleParticipants = () => (
         setShowParticipants(!showParticipants))
-        //console.log('set partics',showParticipants));
 
     const date = [
         toTimeString(startTime),
@@ -61,9 +60,11 @@ const Reservation = ((props) => {
     ].join(' TO ')
 
     return <div className='reservation'>
-        <div className='reservation-text-block reserve-back-button' onClick={props.goBack}>
-            <div className='icon back-icon'>
-            </div>
+        <div
+            className='reservation-text-block reserve-back-button'
+            onClick={props.goBack}
+        >
+            <div className='icon back-icon'/>
             <div className='reservation-title'>{subject}</div>
         </div>
         <ReservationTextBlock

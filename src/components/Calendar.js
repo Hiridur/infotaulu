@@ -11,11 +11,10 @@ const CalendarItem = (props) => (
         <div className='calendar-item-organizer'>{props.meeting?.organizer}</div>
     </div>
 )
-const findCurrentMeeting = (meetings, hours, minutes) => (
+const findNextMeeting = (meetings, hours, minutes) => (
     meetings?.find(
     (meeting) => {
         const startTime = new Date(meeting.startTime);
-        const endTime = new Date(meeting.endTime);
 
         return (
             startTime.getHours() === hours &&
@@ -48,22 +47,27 @@ const Calendar = (props) => {
         (isToday(meeting.startTime))
     )
 
-    return <table className='reservation-calendar'>
-        <tbody> {
+    return <div className='reservation-calendar'>
+        <table><tbody>{
             Array.apply(null, {length: 23}).map((_, i)=>{
                 const hours = Math.floor(i/2+7);
                 const minutes = (i%2?'30':'00');
-                const currentMeeting = findCurrentMeeting(
+                const currentMeeting = findNextMeeting(
                     todaysMeetings,
                     hours,
                     minutes
                 )
                 const duration = meetingDuration(currentMeeting);
 
-                return <tr className='calendar-row'>
-                    <td className='time-column'>{hours + ':' + minutes}</td>
+                return <tr className='calendar-row' key={i + 'c'}>
+                    <td className='time-column'>
+                        {hours + ':' + minutes}
+                    </td>
                     {currentMeeting
-                        ? <td className='event-column' rowSpan={duration}>
+                        ? <td
+                            className='event-column'
+                            rowSpan={duration}
+                        >
                             <CalendarItem
                                 setSelected={
                                     (meeting) => setSelected(meeting)
@@ -76,15 +80,16 @@ const Calendar = (props) => {
                     }
                 </tr>
             })
-        }{
+        }</tbody></table>
+        {
             <div
                 className='calendar-tracker'
                 style={{top: trackerPosition()}}
             >
                 <div className='calendar-tracker-ball'/>
             </div>
-        } </tbody>
-    </table>
+        }
+    </div>
 }
 
 export default Calendar;
